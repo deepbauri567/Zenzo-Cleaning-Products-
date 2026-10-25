@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENZO BULK & WHOLESALE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f9f7;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Nav Bar */
+        header {
+            background: #ffffff;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area h1 {
+            font-size: 24px;
+            color: #008037;
+            font-weight: 700;
+        }
+
+        .logo-area span {
+            color: #f37021;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #008037;
+        }
+
+        .whatsapp-top {
+            background: #25D366;
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 8px rgba(37,211,102,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 60px 50px;
+            background: linear-gradient(135deg, #f0fbf5, #eef9f2);
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-text {
+            flex: 1.2;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+
+        .badge-factory {
+            background: #f37021;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .hero-text h2 {
+            font-size: 2.8rem;
+            color: #004d26;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .moq-info-box {
+            background: #e3f7ed;
+            border-left: 5px solid #008037;
+            padding: 15px;
+            border-radius: 4px 8px 8px 4px;
+            font-weight: 600;
+            color: #004d26;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #008037;
+            color: white;
+            box-shadow: 0 6px 15px rgba(0,128,55,0.25);
+        }
+
+        .btn-primary:hover {
+            background: #00662b;
+            transform: translateY(-2px);
+        }
+
+        /* Animated Bottle Area */
+        .hero-animation {
+            flex: 0.8;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 450px;
+        }
+
+        .animation-container {
+            position: relative;
+            width: 200px;
+            height: 380px;
+        }
+
+        .bottle-main {
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 5;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+        }
+
+        /* Drop Animation */
+        .water-drop {
+            width: 12px;
+            height: 12px;
+            background: #d4f1f9;
+            border-radius: 0 50% 50% 50%;
+            transform: rotate(45deg);
+            position: absolute;
+            left: 47%;
+            top: 250px; /* Adjust according to cap location if needed, otherwise below the bottle */
+            z-index: 1;
+            opacity: 0;
+            animation: dripMotion 2.2s infinite cubic-bezier(0.4, 0, 1, 1);
+        }
+
+        /* Water splash & Cleanness wave on ground */
+        .clean-wave {
+            width: 10px;
+            height: 5px;
+            background: rgba(144, 238, 144, 0.4);
+            border: 2px solid rgba(0, 128, 55, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            opacity: 0;
+            animation: floorClean 2.2s infinite ease-out;
+        }
+
+        .sparkle {
+            position: absolute;
+            bottom: -20px;
+            left: 45%;
+            font-size: 20px;
+            color: #ffcc00;
+            z-index: 10;
+            opacity: 0;
+            animation: sparkleMagic 2.2s infinite ease-out;
+        }
+
+        @keyframes dripMotion {
+            0% { top: 220px; opacity: 1; transform: rotate(45deg) scale(0.6); }
+            10% { opacity: 1; }
+            70% { top: 380px; opacity: 1; transform: rotate(45deg) scale(1.1); }
+            80% { opacity: 0; }
+            100% { top: 380px; opacity: 0; }
+        }
+
+        @keyframes floorClean {
+            0%, 65% { width: 10px; height: 5px; opacity: 0; }
+            70% { opacity: 1; border-color: rgba(255, 255, 255, 0.9); background: rgba(0, 200, 80, 0.5); }
+            100% { width: 140px; height: 18px; opacity: 0; background: rgba(255, 255, 255, 0); border-width: 4px; }
+        }
+
+        @keyframes sparkleMagic {
+            0%, 68% { opacity: 0; transform: scale(0) rotate(0); }
+            75% { opacity: 1; transform: scale(1.3) rotate(45deg); }
+            100% { opacity: 0; transform: translateY(-30px) scale(0.6) rotate(180deg); }
+        }
+
+        /* Products Grid */
+        .products-sec {
+            padding: 80px 50px;
+            text-align: center;
+        }
+
+        .products-sec h3 {
+            font-size: 2.2rem;
+            color: #004d26;
+            margin-bottom: 50px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .p-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #eef6f2;
+        }
+
+        .p-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,128,55,0.12);
+        }
+
+        .p-card img {
+            max-height: 150px;
+            object-fit: contain;
+            margin: 0 auto 20px auto;
+        }
+
+        .moq-tag {
+            background: #fff0e5;
+            color: #f37021;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 15px;
+            align-self: center;
+            margin-bottom: 15px;
+        }
+
+        .p-card h4 {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .wa-btn {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .wa-btn:hover {
+            background: #1ebd5c;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .hero { padding: 30px 20px; }
+            .hero-text h2 { font-size: 2rem; }
+            .products-sec { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>ZENZO <span>WHOLESALE</span></h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Bulk Products</a></li>
+            <li><a href="#" class="whatsapp-top">WhatsApp Enquiry</a></li>
+        </ul>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <span class="badge-factory">FACTORY DIRECT BULK RATES</span>
+            <h2>PREMIUM BULK CLEANING SUPPLIES FOR YOUR BUSINESS</h2>
+            <p>Ideal for Offices, Hospitals, Hotels, and Retailers. Get Zenzo's guaranteed quality directly in wholesale quantities. Buy in bulk to optimize costs.</p>
+            
+            <div class="moq-info-box">
+                📦 Minimum Order Quantity (MOQ): 1 Peti (Case) or 5 Litre Jar
+            </div>
+
+            <div class="hero-btns">
+                <a href="https://wa.me/91YOURNUMBER" target="_blank" class="btn btn-primary">💬 Chat & Get Bulk Prices</a>
+            </div>
+        </div>
+
+        <div class="hero-animation">
+            <div class="animation-container">
+                <!-- Replace 'zenzo-bottle.png' with your image name after uploading to your Github repo -->
+                <img src="https://i.ibb.co/LST68MHg/Zenzo-Bottle-Original.png" alt="Zenzo Bottle" class="bottle-main">
+                <!-- animated drops and wave on surface -->
+                <div class="water-drop"></div>
+                <div class="clean-wave"></div>
+                <div class="sparkle">✦</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-sec">
+        <h3>OUR BULK PACKAGES</h3>
+        <div class="grid">
+            
+            <div class="p-card">
+                <span class="moq-tag">MOQ: 1 PETI (CASE OF 4)</span>
+                <!-- High-quality cleaning bottle illustration -->
+                <img src="https://cdn-icons-png.flaticon.com/512/3594/3594248.png" alt="Zenzo Floor Cleaner">
+                <h4>ZENZO Floor Cleaner (5L Jar)</h4>
+                <a href="https://wa.me/91YOURNUMBER?text=Interested%20in%20Bulk%20Floor%20Cleaner" class="wa-btn">Enquiry via WhatsApp</a>
+            </div>
+
+            <div class="p-card">
+                <span class="moq-tag">MOQ: 5 LITRE JAR</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/2932/2932579.png" alt="White Phenyl">
+                <h4>ZENZO White Phenyl (Bulk)</h4>
+                <a href="https://wa.me/91YOURNUMBER?text=Interested%20in%20Bulk%20White%20Phenyl" class="wa-btn">Enquiry via WhatsApp</a>
+            </div>
+
+            <div class="p-card">
+                <span class="moq-tag">MOQ: 1 PETI</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/3074/3074058.png" alt="Multipurpose Cleaner">
+                <h4>ZENZO Multi-purpose Cleaner</h4>
+                <a href="https://wa.me/91YOURNUMBER?text=Interested%20in%20Bulk%20Multipurpose%20Cleaner" class="wa-btn">Enquiry via WhatsApp</a>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENZO BULK & WHOLESALE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f9f7;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Nav Bar */
+        header {
+            background: #ffffff;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area h1 {
+            font-size: 24px;
+            color: #008037;
+            font-weight: 700;
+        }
+
+        .logo-area span {
+            color: #f37021;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #008037;
+        }
+
+        .whatsapp-top {
+            background: #25D366;
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 8px rgba(37,211,102,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 60px 50px;
+            background: linear-gradient(135deg, #f0fbf5, #eef9f2);
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-text {
+            flex: 1.2;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+
+        .badge-factory {
+            background: #f37021;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .hero-text h2 {
+            font-size: 2.8rem;
+            color: #004d26;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .moq-info-box {
+            background: #e3f7ed;
+            border-left: 5px solid #008037;
+            padding: 15px;
+            border-radius: 4px 8px 8px 4px;
+            font-weight: 600;
+            color: #004d26;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #008037;
+            color: white;
+            box-shadow: 0 6px 15px rgba(0,128,55,0.25);
+        }
+
+        .btn-primary:hover {
+            background: #00662b;
+            transform: translateY(-2px);
+        }
+
+        /* Animated Bottle Area */
+        .hero-animation {
+            flex: 0.8;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 450px;
+        }
+
+        .animation-container {
+            position: relative;
+            width: 200px;
+            height: 380px;
+        }
+
+        .bottle-main {
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 5;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+        }
+
+        /* Drop Animation */
+        .water-drop {
+            width: 12px;
+            height: 12px;
+            background: #d4f1f9;
+            border-radius: 0 50% 50% 50%;
+            transform: rotate(45deg);
+            position: absolute;
+            left: 47%;
+            top: 250px; /* Adjust according to cap location if needed, otherwise below the bottle */
+            z-index: 1;
+            opacity: 0;
+            animation: dripMotion 2.2s infinite cubic-bezier(0.4, 0, 1, 1);
+        }
+
+        /* Water splash & Cleanness wave on ground */
+        .clean-wave {
+            width: 10px;
+            height: 5px;
+            background: rgba(144, 238, 144, 0.4);
+            border: 2px solid rgba(0, 128, 55, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            opacity: 0;
+            animation: floorClean 2.2s infinite ease-out;
+        }
+
+        .sparkle {
+            position: absolute;
+            bottom: -20px;
+            left: 45%;
+            font-size: 20px;
+            color: #ffcc00;
+            z-index: 10;
+            opacity: 0;
+            animation: sparkleMagic 2.2s infinite ease-out;
+        }
+
+        @keyframes dripMotion {
+            0% { top: 220px; opacity: 1; transform: rotate(45deg) scale(0.6); }
+            10% { opacity: 1; }
+            70% { top: 380px; opacity: 1; transform: rotate(45deg) scale(1.1); }
+            80% { opacity: 0; }
+            100% { top: 380px; opacity: 0; }
+        }
+
+        @keyframes floorClean {
+            0%, 65% { width: 10px; height: 5px; opacity: 0; }
+            70% { opacity: 1; border-color: rgba(255, 255, 255, 0.9); background: rgba(0, 200, 80, 0.5); }
+            100% { width: 140px; height: 18px; opacity: 0; background: rgba(255, 255, 255, 0); border-width: 4px; }
+        }
+
+        @keyframes sparkleMagic {
+            0%, 68% { opacity: 0; transform: scale(0) rotate(0); }
+            75% { opacity: 1; transform: scale(1.3) rotate(45deg); }
+            100% { opacity: 0; transform: translateY(-30px) scale(0.6) rotate(180deg); }
+        }
+
+        /* Products Grid */
+        .products-sec {
+            padding: 80px 50px;
+            text-align: center;
+        }
+
+        .products-sec h3 {
+            font-size: 2.2rem;
+            color: #004d26;
+            margin-bottom: 50px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .p-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #eef6f2;
+        }
+
+        .p-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,128,55,0.12);
+        }
+
+        .p-card img {
+            max-height: 150px;
+            object-fit: contain;
+            margin: 0 auto 20px auto;
+        }
+
+        .moq-tag {
+            background: #fff0e5;
+            color: #f37021;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 15px;
+            align-self: center;
+            margin-bottom: 15px;
+        }
+
+        .p-card h4 {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .wa-btn {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .wa-btn:hover {
+            background: #1ebd5c;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .hero { padding: 30px 20px; }
+            .hero-text h2 { font-size: 2rem; }
+            .products-sec { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>ZENZO <span>WHOLESALE</span></h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Bulk Products</a></li>
+            <li><a href="#" class="whatsapp-top">WhatsApp Enquiry</a></li>
+        </ul>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <span class="badge-factory">FACTORY DIRECT BULK RATES</span>
+            <h2>PREMIUM BULK CLEANING SUPPLIES FOR YOUR BUSINESS</h2>
+            <p>Ideal for Offices, Hospitals, Hotels, and Retailers. Get Zenzo's guaranteed quality directly in wholesale quantities. Buy in bulk to optimize costs.</p>
+            
+            <div class="moq-info-box">
+                📦 Minimum Order Quantity (MOQ): 1 Peti (Case) or 5 Litre Jar
+            </div>
+
+            <div class="hero-btns">
+                <a href="https://wa.me/91YOURNUMBER" target="_blank" class="btn btn-primary">💬 Chat & Get Bulk Prices</a>
+            </div>
+        </div>
+
+        <div class="hero-animation">
+            <div class="animation-container">
+                <!-- Replace 'zenzo-bottle.png' with your image name after uploading to your Github repo -->
+                <img src="https://i.ibb.co/LST68MHg/Zenzo-Bottle-Original.png" alt="Zenzo Bottle" class="bottle-main">
+                <!-- animated drops and wave on surface -->
+                <div class="water-drop"></div>
+                <div class="clean-wave"></div>
+                <div class="sparkle">✦</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-sec">
+        <h3>OUR BULK PACKAGES</h3>
+        <div class="grid">
+            
+            <div class="p-card">
+                <span class="moq-tag">MOQ: 1 PETI (CASE OF 4)</span>
+                <!-- High-quality cleaning bottle illustration -->
+                <img src="https://cdn-icons-png.flaticon.com/512/3594/3594248.png" alt="Zenzo Floor Cleaner">
+                <h4>ZENZO Floor Cleaner (5L Jar)</h4>
+                <a href="https://wa.me/91YOURNUMBER?text=Interested%20in%20Bulk%20Floor%20Cleaner" class="wa-btn">Enquiry via WhatsApp</a>
+            </div>
+
+            <div class="p-card">
+                <span class="moq-tag">MOQ: 5 LITRE JAR</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/2932/2932579.png" alt="White Phenyl">
+                <h4>ZENZO White Phenyl (Bulk)</h4>
+                <a href="https://wa.me/91YOURNUMBER?text=Interested%20in%20Bulk%20White%20Phenyl" class="wa-btn">Enquiry via WhatsApp</a>
+            </div>
+
+            <div class="p-card">
+                <span class="moq-tag">MOQ: 1 PETI</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/3074/3074058.png" alt="Multipurpose Cleaner">
+                <h4>ZENZO Multi-purpose Cleaner</h4>
+                <a href="https://wa.me/91YOURNUMBER?text=Interested%20in%20Bulk%20Multipurpose%20Cleaner" class="wa-btn">Enquiry via WhatsApp</a>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>
